@@ -61,7 +61,7 @@ app.get("/allData", function(req,res,next) {
     client.query(sql2, function(err, result) {
         if(err) res.send(err);
         else {
-            json["shops"] = result.rows;
+            json["purchases"] = result.rows;
             console.log("alldataJson : ",json)
             res.send(json);
         }
