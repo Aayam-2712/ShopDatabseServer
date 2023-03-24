@@ -120,7 +120,7 @@ app.put("/product/:id", function(req, res,next) {
 app.get("/purchases", function(req,res,next) {
     console.log("Request Query : ",req.query)
     let product = req.query.product ? +req.query.product : false ;
-    let store = req.query.store ? req.query.store : false;
+    let store = req.query.store ? +req.query.store : false;
     let sort = req.query.sort ? req.query.sort : false;
     let sql1 = `SELECT * FROM purchases WHERE productid=$1`;
     let sql2 = `SELECT * FROM purchases WHERE shopid=$1`;
