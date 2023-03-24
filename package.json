@@ -1,0 +1,19 @@
+{
+  "name": "DatabaseServer",
+  "version": "1.0.0",
+  "main": "shopStoreServer.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "pg": "^8.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node shopStoreServer.js"
+  },
+  "keywords": ["node", "build"],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
