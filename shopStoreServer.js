@@ -44,6 +44,31 @@ let connData = {
 let connection = mysql.createConnection(connData);
 
 
+
+app.get("/allData", function(req,res,next) {
+    let json = {};
+    let sql = `SELECT * FROM shops`;
+    client.query(sql, function(err, result) {
+        if(err) res.send(err);
+        else json["shops"] = result.rows;
+    });
+    let sql1 = `SELECT * FROM products`;
+    client.query(sql1, function(err, result) {
+        if(err) res.send(err);
+        else json["products"] = result.rows;
+    });
+    let sql2 = `SELECT * FROM purchases`;
+    client.query(sql2, function(err, result) {
+        if(err) res.send(err);
+        else {
+            json["shops"] = result.rows;
+            console.log("alldataJson : ",json)
+            res.send(json);
+        }
+    });
+});
+
+
 app.get("/shops", function(req,res,next) {
     let sql = `SELECT * FROM shops`;
     client.query(sql, function(err, result) {
