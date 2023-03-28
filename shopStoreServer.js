@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
 });
 
 var port= process.env.PORT||2410;
+// let port = 2410;
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));
 
 
@@ -88,8 +89,10 @@ app.get("/shop/:id", function(req,res, next) {
 });
 
 app.post("/shop/add", function(req,res,next) {
+    console.log("body",req.body);
+    delete req.body["id"];
     var values = Object.values(req.body);
-    // console.log(values);
+    console.log(values);
     let sql = `INSERT INTO shops( name, rent ) VALUES ($1,$2)`;
     client.query(sql, values, function(err, result) {
         if(err) { res.status(400).send(err) };
@@ -118,14 +121,12 @@ app.get("/product/:id", function(req,res, next) {
 });
 
 app.post("/product/add", function(req,res,next) {
+    console.log("body",req.body);
+    delete req.body["productid"];
     var values = Object.values(req.body);
-    // console.log(values);
-    let arr = [];
-    arr.push(values.productname);
-    arr.push(values.category);
-    arr.push(values.description);
+    console.log("values ",values);
     let sql = `INSERT INTO products( productname, category, description ) VALUES ($1,$2,$3)`;
-    client.query(sql, arr, function(err, result) {
+    client.query(sql, values, function(err, result) {
         if(err) { res.status(400).send(err) };
         res.send(`${result.rowCount} insertion successful`);
     });
