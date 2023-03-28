@@ -120,8 +120,12 @@ app.get("/product/:id", function(req,res, next) {
 app.post("/product/add", function(req,res,next) {
     var values = Object.values(req.body);
     // console.log(values);
+    let arr = [];
+    arr.push(values.productname);
+    arr.push(values.category);
+    arr.push(values.description);
     let sql = `INSERT INTO products( productname, category, description ) VALUES ($1,$2,$3)`;
-    client.query(sql, values, function(err, result) {
+    client.query(sql, arr, function(err, result) {
         if(err) { res.status(400).send(err) };
         res.send(`${result.rowCount} insertion successful`);
     });
